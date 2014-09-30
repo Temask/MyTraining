@@ -3,50 +3,41 @@
  */
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
 public class ChooseFigure {
 
     public static void main(String args[])
             throws java.io.IOException {
         char choice;
-        Figures per = new Figures();
-        Figures a = new Figures();
-        Figures b = new Figures();
         Scanner sc = new Scanner(System.in);
-
-      do {
+        ArrayList figureList = new ArrayList();
+        while (true) {
             System.out.println("Help on:");
             System.out.println("  1. Circle");
             System.out.println("  2. Rectangle");
             System.out.println("  3. Quadrate");
+            System.out.println("  4. Complete");
             System.out.println("Choose one:");
             choice = (char) System.in.read();
-          choice(choice, per, a, b, sc);
-        } while (isChoiceValid(choice));
 
-
-        System.out.println("\n");
-
-
+            choice(choice, sc, figureList);
+        }
 
 
     }
 
-    private static boolean isChoiceValid(char choice) {
 
-        return  Integer.valueOf(choice) >= 1 && Integer.valueOf(choice) <= 3;
-
-    }
-
-    private static void choice(char choice, Figures per, Figures a, Figures b, Scanner sc) {
+    private static void choice(char choice, Scanner sc, ArrayList figureList) {
         switch (choice) {
             case '1':
-                System.out.println("Circle:\n");
+                System.out.println("Circle:");
                 System.out.println("Set radius of the Circle");
                 System.out.print("radius:");
-                if (sc.hasNextDouble()) { // true if int value entered
-                    double radius = sc.nextDouble(); // reads int value from thread and saves to input parameter
-                    per.Circle(radius);
+                if (sc.hasNextDouble()) {
+                    double radius = sc.nextDouble();
+                    figureList.add(Figures.circle(radius));
                 }
 
                 break;
@@ -60,22 +51,35 @@ public class ChooseFigure {
                     System.out.println("height:");
                     if (sc.hasNextDouble()) {
                         double height = sc.nextDouble();
-                        a.Rectangle(width, height);
+                        figureList.add(Figures.rectangle(width, height));
                     }
                 }
- break;
+                break;
             case '3':
                 System.out.println("Quadrate:\n");
                 System.out.println("Set side of the Quadrate");
                 System.out.print("side:");
-                if (sc.hasNextDouble()){
-                    double side=sc.nextDouble();
-                    b.Quadrate(side);
+                if (sc.hasNextDouble()) {
+                    double side = sc.nextDouble();
+                    figureList.add(Figures.quadrate(side));
                 }
+                break;
+            case '4':
+                System.out.println("List of chosen figures");
+                for (int i = 0; i < figureList.size(); i++) {
+
+                    System.out.println(" - Figure " + figureList.get(i));
+
+                }
+                System.exit(0);
                 break;
 
 
+            default:
+                System.out.println(" Wrong key ");
+                System.exit(0);
 
         }
+
     }
 }
