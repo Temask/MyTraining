@@ -20,7 +20,7 @@ public class ChooseFigure {
             System.out.println("  3. Quadrate");
             System.out.println("  4. Complete");
             System.out.println("Choose one:");
-            choice = (char) System.in.read();
+            choice = (char) sc.next().charAt(0);
 
             choice(choice, sc, figureList);
         }
@@ -77,7 +77,7 @@ public class ChooseFigure {
 
             default:
                 System.out.println(" Wrong key ");
-                System.exit(0);
+
 
         }
 
