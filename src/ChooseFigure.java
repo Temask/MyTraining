@@ -12,7 +12,7 @@ public class ChooseFigure {
             throws java.io.IOException {
         char choice;
         Scanner sc = new Scanner(System.in);
-        ArrayList figureList = new ArrayList();
+        ArrayList <Figures> figureList = new ArrayList <Figures>();
         while (true) {
             System.out.println("Help on:");
             System.out.println("  1. Circle");
@@ -29,7 +29,7 @@ public class ChooseFigure {
     }
 
 
-    private static void choice(char choice, Scanner sc, ArrayList figureList) {
+    private static void choice(char choice, Scanner sc, ArrayList <Figures>figureList) {
         switch (choice) {
             case '1':
                 System.out.println("Circle:");
@@ -37,7 +37,8 @@ public class ChooseFigure {
                 System.out.print("radius:");
                 if (sc.hasNextDouble()) {
                     double radius = sc.nextDouble();
-                    figureList.add(Figures.circle(radius));
+                    Figures f=new Circle(radius);
+                    figureList.add(f);
                 }
 
                 break;
@@ -51,7 +52,8 @@ public class ChooseFigure {
                     System.out.println("height:");
                     if (sc.hasNextDouble()) {
                         double height = sc.nextDouble();
-                        figureList.add(Figures.rectangle(width, height));
+                        Figures f=new Rectangle(width, height);
+                        figureList.add(f);
                     }
                 }
                 break;
@@ -61,14 +63,15 @@ public class ChooseFigure {
                 System.out.print("side:");
                 if (sc.hasNextDouble()) {
                     double side = sc.nextDouble();
-                    figureList.add(Figures.quadrate(side));
+                    Figures f=new Quidrate(side);
+                    figureList.add(f);
                 }
                 break;
             case '4':
                 System.out.println("List of chosen figures");
                 for (int i = 0; i < figureList.size(); i++) {
 
-                    System.out.println(" - Figure " + figureList.get(i));
+                    System.out.println(" - Figure " + figureList.get(i).perimeter());
 
                 }
                 System.exit(0);
